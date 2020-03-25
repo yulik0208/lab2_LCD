@@ -32,13 +32,13 @@ void LCD_Pin_Initialize(void)
 
 void Display_Write_Ins(uint8_t data)
 {
-	GPIO_SetBits(LCD_PORT, ((data & 0x0F)) << LCD_PIN_OFFSET);
+	GPIO_SetBits(LCD_PORT, (((data>>4) & 0x0F)) << LCD_PIN_OFFSET);
 	GPIO_SetBits(LCD_PORT, LCD_PIN_EN);
 	lcd_delay(delay_time);
 	GPIO_ResetBits(LCD_PORT, LCD_PIN_EN);
 	GPIO_ResetBits(LCD_PORT, 0x0F<<LCD_PIN_OFFSET);
 	
-	GPIO_SetBits(LCD_PORT, (((data>>4) & 0x0F)) << LCD_PIN_OFFSET);
+	GPIO_SetBits(LCD_PORT, ((data & 0x0F)) << LCD_PIN_OFFSET);
 	GPIO_SetBits(LCD_PORT, LCD_PIN_EN);
 	lcd_delay(delay_time);
 	GPIO_ResetBits(LCD_PORT, LCD_PIN_EN);
